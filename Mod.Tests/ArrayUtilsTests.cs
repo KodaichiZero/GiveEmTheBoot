@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using GiveEmTheBoot.Utils;
+using EnemySense.Utils;
 using NUnit.Framework;
 
-namespace GiveEmTheBoot.Tests
+namespace EnemySense.Tests
 {
     [TestFixture]
     public class ArrayUtilsTests

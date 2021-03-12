@@ -2,29 +2,23 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace GiveEmTheBoot.Utils
-{
-    public static class ArrayUtils
-    {
-        public const string NullString = "<null>";
+namespace EnemySense.Utils {
+	public static class ArrayUtils {
+		public const string NullString = "<null>";
 
-        public static IEnumerable<object> ToArray(object obj)
-        {
-            var asArray = obj as IEnumerable;
-            if (asArray == null)
-            {
-                if (obj == null)
-                {
-                    return Enumerable.Empty<object>();
-                }
-                return new[] {obj};
-            }
-            return asArray.Cast<object>();
-        }
+		public static IEnumerable<object> ToArray(object obj) {
+			var asArray = obj as IEnumerable;
+			if(asArray == null) {
+				if(obj == null) {
+					return Enumerable.Empty<object>();
+				}
+				return new[] { obj };
+			}
+			return asArray.Cast<object>();
+		}
 
-        public static IEnumerable<string> ToStringArray(object obj)
-        {
-            return ToArray(obj).Select(o => o?.ToString() ?? NullString);
-        }
-    }
+		public static IEnumerable<string> ToStringArray(object obj) {
+			return ToArray(obj).Select(o => o?.ToString() ?? NullString);
+		}
+	}
 }
