@@ -50,12 +50,13 @@ namespace GiveEmTheBoot.Patches {
 					Vector3 fullVector = new Vector3(horizVector.x, pushForce * 0.375F, horizVector.y);
 
 					//Add a large amount of force with mass taken into account
-					//__instance.GetComponent<Rigidbody>().AddForce(yeetVector, ForceMode.Impulse);
+					__instance.GetComponent<Rigidbody>().AddForce(fullVector * 0.9F, ForceMode.Impulse);
 
 					//Add a small amount of velocity regardless of mass
-					//__instance.GetComponent<Rigidbody>().AddForce(yeetVector * 0.1F, ForceMode.VelocityChange);
+					__instance.GetComponent<Rigidbody>().AddForce(fullVector * 0.1F, ForceMode.VelocityChange);
 
-					__instance.m_pushForce = fullVector;
+					//No neef to 
+					__instance.m_pushForce = Vector3.zero;
 				}
 			}
 		}
