@@ -1,4 +1,5 @@
-﻿using HarmonyLib;
+﻿using GiveEmTheBoot.Util;
+using HarmonyLib;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -23,7 +24,7 @@ namespace GiveEmTheBoot.Patches {
 				//Add in the player's unarmed level to the additional push force, max of 75F extra force at level 100.
 				if(player.GetSkills().m_skillData.ContainsKey(Skills.SkillType.Unarmed)) {
 					float level = player.GetSkills().m_skillData.GetValueSafe(Skills.SkillType.Unarmed).m_level;
-					pushForce += (level / 100F) * 75F;
+					pushForce += (level / 100F) * 50F;
 				}
 
 				//Add the weight of the player's foot armor to the push force, max bonus of 50F with 15 pound boots.
@@ -31,18 +32,21 @@ namespace GiveEmTheBoot.Patches {
 				player.GetInventory().GetWornItems(equipList);
 				foreach(ItemDrop.ItemData item in equipList) {
 					if(item.GetTooltip().Contains("legs")) {
-						pushForce += (item.GetWeight() / 15F) * 75F;
+						pushForce += (item.GetWeight() / 15F) * 50F;
 						break;
 					}
 				}
 
 				//Also add a flat 50F bonus if the enemy is staggered.
 				if(__instance.IsStaggering()) {
-					pushForce += 50F;
+					pushForce += 25F;
 				}
 
 				//Apply additional poush force to the hit data.
 				if(pushForce > 0f) {
+					Debug.Log("Giving the boot with " + pushForce + " additional pounds of force!");
+
+					YeetText.AddYeetText(__instance.GetTopPoint());
 
 					Vector2 horizVector = new Vector2(player.GetMoveDir().x, player.GetMoveDir().z);
 					horizVector.Normalize();
@@ -56,7 +60,7 @@ namespace GiveEmTheBoot.Patches {
 					__instance.GetComponent<Rigidbody>().AddForce(fullVector * 0.1F, ForceMode.VelocityChange);
 
 					//No neef to 
-					__instance.m_pushForce = Vector3.zero;
+					//__instance.m_pushForce = Vector3.zero;
 				}
 			}
 		}
