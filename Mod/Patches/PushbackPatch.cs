@@ -44,8 +44,6 @@ namespace GiveEmTheBoot.Patches {
 
 				//Apply additional poush force to the hit data.
 				if(pushForce > 0f) {
-					Debug.Log("Giving the boot with " + pushForce + " additional pounds of force!");
-
 					YeetText.AddYeetText(__instance.GetTopPoint());
 
 					Vector2 horizVector = new Vector2(player.GetMoveDir().x, player.GetMoveDir().z);
@@ -58,9 +56,6 @@ namespace GiveEmTheBoot.Patches {
 
 					//Add a small amount of velocity regardless of mass
 					__instance.GetComponent<Rigidbody>().AddForce(fullVector * 0.1F, ForceMode.VelocityChange);
-
-					//No neef to 
-					//__instance.m_pushForce = Vector3.zero;
 				}
 			}
 		}
