@@ -24,7 +24,7 @@ namespace GiveEmTheBoot.Patches {
 			bool kickInput = false;
 
 			try {
-				if(kickHotkey.Value.Length > 0 && Input.GetKey(kickHotkey.Value)) {
+				if(kickHotkey.Value.Length > 0 && Input.GetKey(kickHotkey.Value.ToLower())) {
 					kickInput = true;
 				}
 			} catch(Exception e) {

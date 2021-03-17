@@ -5,7 +5,7 @@ using HarmonyLib;
 using System.Linq;
 
 namespace GiveEmTheBoot {
-	[BepInPlugin("org.kodaichizero.giveemtheboot", "GiveEmTheBoot", "1.2")]
+	[BepInPlugin("KZ.GiveEmTheBoot", "GiveEmTheBoot", "1.2")]
 	public class Mod : BaseUnityPlugin {
 		private static readonly Harmony harmony = new(typeof(Mod).GetCustomAttributes(typeof(BepInPlugin), false)
 			.Cast<BepInPlugin>()
