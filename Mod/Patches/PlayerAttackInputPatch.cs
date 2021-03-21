@@ -9,7 +9,6 @@ namespace GiveEmTheBoot.Patches {
 
 		//Loaded config values for adjusting the mod as you see fit.
 		public static ConfigEntry<string> kickHotkey;
-		public static bool mustKick = false;
 		public static bool invalidKey = false;
 
 		//In this method we check when pushback is being applied to an enemy, and if we're kicking them, we add force.
@@ -36,12 +35,25 @@ namespace GiveEmTheBoot.Patches {
 
 			//Go ahead with the kick
 			if(kickInput) {
-				mustKick = true;
-				__instance.StartAttack(null, true);
+				__instance.AbortEquipQueue();
+				if((__instance.InAttack() && !__instance.HaveQueuedChain()) || __instance.InDodge() || !__instance.CanMove() || __instance.IsKnockedBack() || __instance.IsStaggering() || __instance.InMinorAction()) {
+					return;
+				}
 
+				if(__instance.m_currentAttack != null) {
+					__instance.m_currentAttack.Stop();
+					__instance.m_previousAttack = __instance.m_currentAttack;
+					__instance.m_currentAttack = null;
+				}
+
+				ItemDrop.ItemData currentWeapon = __instance.m_unarmedWeapon.m_itemData;
+				Attack attack = currentWeapon.m_shared.m_secondaryAttack.Clone();
+
+				if(attack.Start(__instance, __instance.m_body, __instance.m_zanim, __instance.m_animEvent, __instance.m_visEquipment, currentWeapon, __instance.m_previousAttack, __instance.m_timeSinceLastAttack, 0F)) {
+					__instance.m_currentAttack = attack;
+					__instance.m_lastCombatTimer = 0f;
+				}
 			}
-
-			mustKick = false;
 		}
 	}
 }

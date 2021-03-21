@@ -33,7 +33,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Mod.cs" />
-    <Compile Include="Patches\GetCurrentWeaponPatch.cs" />
     <Compile Include="Patches\PlayerAttackInputPatch.cs" />
     <Compile Include="Patches\PushbackPatch.cs" />
     <Compile Include="Util\YeetText.cs" />
